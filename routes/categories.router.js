@@ -1,26 +1,21 @@
 const express = require('express');
+const {
+  getCategories,
+  getOneCategory,
+} = require('../services/categories.service');
 const router = express.Router();
-const saludar = require('./../src/js')
 
-router.use('/', (req, res) => {
-    res.send('Hola soy categories');
-    saludar();
+router.get('/', async (req, res) => {
+  const renderCategories = await getCategories();
+  res.json(renderCategories);
 });
 
-router.use('/', (req, res) => {
-  res.send('Hola soy categories');
-});
+router.get('/:categoryName/:categoryId', async (req, res) => {
+  const { categoryName, categoryId } = req.params;
+  console.log('este es el id: ', categoryId);
+  const category = await getOneCategory(categoryId);
 
-router.use('/', (req, res) => {
-  res.send('Hola soy categories');
-});
-
-router.use('/', (req, res) => {
-  res.send('Hola soy categories');
-});
-
-router.use('/', (req, res) => {
-  res.send('Hola soy categories');
+  res.json(category);
 });
 
 module.exports = router;
