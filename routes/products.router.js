@@ -3,7 +3,7 @@ const Boom = require('@hapi/boom');
 const {
   generateProducts,
   getOneProduct,
-  createProduct,
+  searchProduct,
 } = require('../services/products.service');
 const router = express.Router();
 
@@ -26,11 +26,11 @@ router.get('/:categoryName/:productId', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
-  const body = req.body;
-  console.log(body);
-  const newProduct = await createProduct(body);
-  res.json({
+router.get('/?productName', async (req, res) => {
+  const { productName } = req.body;
+  console.log(productName);
+  const searchedProduct = await searchProduct(productName);
+  searchedProduct.json({
     message: 'created',
     data: newProduct,
   });

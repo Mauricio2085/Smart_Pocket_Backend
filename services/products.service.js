@@ -32,37 +32,10 @@ const getOneProduct = async (id) => {
   }
 };
 
-const createProduct = async (product) => {
-  console.log('este es el producto: ', product);
-  const {
-    nombre_producto: nombre,
-    descripcion,
-    categoria_id: categoria,
-    cantidad,
-    costo_unitario: costoUnitario,
-    porcentaje_utilidad: porcentajeUtilidad,
-  } = product;
-  console.log(
-    nombre,
-    descripcion,
-    categoria,
-    cantidad,
-    costoUnitario,
-    porcentajeUtilidad
-  );
-  const query = `INSERT INTO productos (nombre_producto, descripcion, categoria_id, cantidad, costo_unitario, porcentaje_utilidad)
-  VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`;
-
-  const values = [
-    nombre,
-    descripcion,
-    categoria,
-    cantidad,
-    costoUnitario,
-    porcentajeUtilidad,
-  ];
-  const rta = await pool.query(query, values);
-  return rta.rows;
+const searchProduct = async (productName) => {
+  const allProducts = await generateProducts();
+  console.log('Todos los productos', allProducts);
+  console.log('Entra a funcion search', productName);
 };
 
-module.exports = { generateProducts, getOneProduct, createProduct };
+module.exports = { generateProducts, getOneProduct, searchProduct };
