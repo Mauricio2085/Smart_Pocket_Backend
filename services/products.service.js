@@ -20,9 +20,11 @@ const getOneProduct = async (id) => {
       Boom.boomify(error, { statusCode: 400 });
     }
     const query = `SELECT * 
-    FROM productos WHERE id_producto = ${id};`;
+    FROM productos 
+    INNER JOIN categorias ON productos.categoria_id = categorias.id_categoria
+    WHERE productos.id_producto = $1`;
 
-    const rta = await pool.query(query);
+    const rta = await pool.query(query, [id]);
 
     return rta.rows;
   } catch (err) {

@@ -7,10 +7,7 @@ router.get('/', async (req, res) => {
   const productName = req.query.search;
   console.log(productName);
   const foundProduct = await searchProduct(productName);
-  res.json({
-    message: 'Encontrado',
-    data: foundProduct,
-  });
+  res.json(foundProduct);
 });
 
 module.exports = router;

@@ -12,9 +12,9 @@ router.get('/', async (req, res) => {
   res.json(renderProducts);
 });
 
-router.get('/:categoryName/:productId', async (req, res) => {
+router.get('/product-detail/:productId', async (req, res) => {
   try {
-    const { categoryName, productId } = req.params;
+    const { productId } = req.params;
     var error = new Error('Unexpected input');
     console.log('Este es el id', productId);
     const product = await getOneProduct(productId);

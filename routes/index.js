@@ -6,7 +6,7 @@ const router = express.Router();
 
 const routersApi = (app) => {
   app.use('/api/v1', router);
-  router.use('/productos/product-detail', productsRouter);
+  router.use('/productos', productsRouter);
   router.use('/categorias', categoriesRouter);
   router.use('/search', searchRouter);
   router.use('/', (req, res) => {
