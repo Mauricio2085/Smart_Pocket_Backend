@@ -1,43 +1,41 @@
+const Boom = require('@hapi/boom');
 const pool = require('../libs/postgres.pool');
 
 const generateProducts = async () => {
-  const query = `SELECT *
+  try {
+    const query = `SELECT *
 	FROM productos;`;
-  const rta = await pool.query(query);
-  return rta.rows;
+    const rta = await pool.query(query);
+    return rta.rows;
+  } catch (err) {
+    throw Boom.notFound('Productos no disponibles', { error: err.message });
+  }
 };
 
 const getOneProduct = async (id) => {
   try {
-    var error = new Error('Unexpected input');
     const products = await generateProducts();
     const idNumber = Number(id);
     const productFound = products.find(
       (product) => product.id_producto === idNumber
     );
-    console.log('este es el producto encontrado: ', productFound);
     if (!productFound) {
-      Boom.boomify(error, { statusCode: 400 });
+      throw Boom.notFound(`No se encontró el producto con id ${id}`);
     }
     const query = `SELECT * 
     FROM productos 
     INNER JOIN categorias ON productos.categoria_id = categorias.id_categoria
     WHERE productos.id_producto = $1`;
-
-    const rta = await pool.query(query, [id]);
-
+    const rta = await pool.query(query, [idNumber]);
     return rta.rows;
   } catch (err) {
-    const error = err;
-    console.log(error.routine, error.message, error.code, error.hint);
-    return;
+    if (Boom.isBoom(err)) {
+      throw err;
+    }
+    throw Boom.badRequest('Error al consultar la base de datos', {
+      error: err.message,
+    });
   }
 };
 
-const searchProduct = async (productName) => {
-  const allProducts = await generateProducts();
-  console.log('Todos los productos', allProducts);
-  console.log('Entra a funcion search', productName);
-};
-
-module.exports = { generateProducts, getOneProduct, searchProduct };
+module.exports = { generateProducts, getOneProduct };

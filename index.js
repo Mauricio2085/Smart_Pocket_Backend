@@ -3,16 +3,18 @@ const app = express();
 const cors = require('cors');
 const port = 5000;
 const routersApi = require('./routes');
+const errorHandler = require('./middleware/errorHandler');
 
-app.use(cors({
-    origin: 'http://localhost:3000'
-}));
-
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+  })
+);
 app.use(express.json());
 
 app.listen(port, () => {
-    console.log('lisening')});
+  console.log('lisening');
+});
+routersApi(app);
 
-    routersApi(app);
-
-
+app.use(errorHandler);

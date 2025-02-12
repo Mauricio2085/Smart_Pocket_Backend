@@ -1,6 +1,5 @@
 const pool = require('../libs/postgres.pool');
-const { generateProducts } = require('./products.service');
-
+const Boom = require('@hapi/boom');
 const searchProduct = async (productName) => {
   try {
     const query = `
@@ -8,12 +7,13 @@ const searchProduct = async (productName) => {
             WHERE LOWER(nombre_producto) LIKE LOWER($1) 
         `;
     const values = [`%${productName}%`]; // Busca coincidencias parciales
-
+    console.log(values);
     const result = await pool.query(query, values);
     return result.rows; // Devuelve los productos encontrados
   } catch (error) {
-    console.error('Error al buscar productos:', error);
-    throw new Error('Error en la búsqueda de productos');
+    throw Boom.badImplementation('Error en la búsqueda ', {
+      error: error.message,
+    });
   }
 };
 

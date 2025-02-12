@@ -1,9 +1,3 @@
-// delete process.env.PGUSER;
-// delete process.env.PGPASSWORD;
-// delete process.env.PGHOST;
-// delete process.env.PGPORT;
-// delete process.env.PGDATABASE;
-
 const { Pool } = require('pg');
 
 const { config } = require('./../config/config');
