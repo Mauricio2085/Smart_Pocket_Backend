@@ -3,8 +3,7 @@ const pool = require('../libs/postgres.pool');
 
 const generateProducts = async () => {
   try {
-    const query = `SELECT *
-	FROM productos;`;
+    const query = `SELECT *	FROM productos;`;
     const rta = await pool.query(query);
     console.log('📌 Datos obtenidos:', rta.rows);
     return rta.rows;
