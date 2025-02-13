@@ -53,23 +53,23 @@ EXECUTE FUNCTION calcular_precios_y_costos();
 --DROP TRIGGER IF EXISTS trigger_calcular_ganancia_unitaria ON productos;
 
 
--- INSERT INTO productos (
---     nombre_producto,
---     descripcion,
---     categoria_id,
---     cantidad,
---     costo_unitario,
---     porcentaje_utilidad
+INSERT INTO productos (
+    nombre_producto,
+    descripcion,
+    categoria_id,
+    cantidad,
+    costo_unitario,
+    porcentaje_utilidad
 
---     )
---         VALUES (
---             'Triciclo Mickey Mouse',
---             'Triciclo para niños con peso límite de 32 kg',
---             3,
---             1,
---             87500,
---             0.38
---         );
+    )
+        VALUES (
+            'Carro',
+            'Carro electrico cuatro puertas',
+            3,
+            1,
+            47500000,
+            0.38
+        );
 
 INSERT INTO categorias ( nombre_categoria ) 
     VALUES

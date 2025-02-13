@@ -8,7 +8,8 @@ const generateProducts = async () => {
     const rta = await pool.query(query);
     return rta.rows;
   } catch (err) {
-    throw Boom.notFound('Productos no disponibles', { error: err.message });
+    console.error('Error en la consulta:', err.message);
+    // throw Boom.notFound('Productos no disponibles', { error: err.message });
   }
 };
 

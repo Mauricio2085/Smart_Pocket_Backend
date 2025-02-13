@@ -7,7 +7,7 @@ const PASSWORD = encodeURIComponent(config.dbPassword);
 const URI =
   config.dbUrl ||
   `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
-
+console.log(URI);
 const pool = new Pool({
   connectionString: URI,
   ssl: config.dbUrl ? { rejectUnauthorized: false } : false,
