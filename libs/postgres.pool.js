@@ -10,7 +10,7 @@ const URI =
 
 const pool = new Pool({
   connectionString: URI,
-  ssl: config.dbUrl ? { rejectUnauthorized: false } : false, // Necesario para Railway
+  ssl: config.dbUrl ? { rejectUnauthorized: false } : false,
 });
 
 module.exports = pool;
