@@ -6,6 +6,7 @@ const generateProducts = async () => {
     const query = `SELECT *
 	FROM productos;`;
     const rta = await pool.query(query);
+    console.log('📌 Datos obtenidos:', rta.rows);
     return rta.rows;
   } catch (err) {
     console.error('Error en la consulta:', err.message);

@@ -11,6 +11,7 @@ const config = {
   dbName: process.env.DB_NAME,
   dbPort: process.env.DB_PORT,
   dbUrl: process.env.DATABASE_URL,
+  dbPublicUrl: process.env.DATABASE_PUBLIC_URL,
 };
 
 const whatsappNumber = process.env.WHATSAPP_NUMBER;
