@@ -4,10 +4,12 @@ const cors = require('cors');
 const port = 5000;
 const routersApi = require('./routes');
 const errorHandler = require('./middleware/errorHandler');
+const urlProduction = 'https://smart-pocket-v1.vercel.app';
+const urllocal = 'http://localhost:3000';
 
 app.use(
   cors({
-    origin: 'https://smart-pocket-v1.vercel.app',
+    origin: urlProduction,
     methods: 'GET,POST,PUT,DELETE',
     allowedHeaders: 'Content-Type,Authorization',
   })
