@@ -1,5 +1,6 @@
 const poolConection = require('./../libs/postgres.pool');
 const Boom = require('@hapi/boom');
+
 const getCategories = async () => {
   try {
     const query = `SELECT * FROM categorias
