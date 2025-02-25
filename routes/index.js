@@ -14,6 +14,7 @@ const routersApi = (app) => {
   router.use('/search', searchRouter);
   router.use('/whatsapp-number', whatsappRouter);
   router.use('/login', loginRouter);
+  router.use('/profile', loginRouter);
   router.use('/dbTest', databaseTest);
   router.use('/', (req, res) => {
     res.send('Hola soy la raiz');
