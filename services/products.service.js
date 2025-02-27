@@ -39,4 +39,62 @@ const getOneProduct = async (id) => {
   }
 };
 
-module.exports = { generateProducts, getOneProduct };
+const createOneProduct = async (productData) => {
+  try {
+    const {
+      nombre_producto,
+      imagen_producto,
+      descripcion,
+      especificaciones,
+      categoria_id,
+      cantidad,
+      costo_unitario,
+      porcentaje_utilidad,
+      disponible,
+      destacado,
+      propietario,
+      nombre_comercial,
+      precio_comercial,
+    } = productData;
+    const query = `INSERT INTO productos (nombre_producto, imagen_producto, descripcion, especificaciones, categoria_id, cantidad, costo_unitario, porcentaje_utilidad, disponible, destacado, propietario, nombre_comercial, precio_comercial) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *`;
+    const rta = await pool.query(query, [
+      nombre_producto,
+      imagen_producto,
+      descripcion,
+      especificaciones,
+      categoria_id,
+      cantidad,
+      costo_unitario,
+      porcentaje_utilidad,
+      disponible,
+      destacado,
+      propietario,
+      nombre_comercial,
+      precio_comercial,
+    ]);
+    return rta.rows;
+  } catch (err) {
+    throw Boom.badRequest('Error al crear el producto', {
+      error: err.message,
+    });
+  }
+};
+
+const getSumaryProducts = async () => {
+  try {
+    const query = `SELECT id_producto, nombre_producto, costo_unitario, porcentaje_utilidad, precio_venta, cantidad FROM productos;`;
+    const rta = await pool.query(query);
+    return rta.rows;
+  } catch (err) {
+    throw Boom.badRequest('Error al consultar los productos', {
+      error: err.message,
+    });
+  }
+};
+
+module.exports = {
+  generateProducts,
+  getOneProduct,
+  createOneProduct,
+  getSumaryProducts,
+};

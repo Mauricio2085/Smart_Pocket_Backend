@@ -9,7 +9,7 @@ const urllocal = 'http://localhost:3000';
 
 app.use(
   cors({
-    origin: urllocal,
+    origin: urlProduction,
     methods: 'GET,POST,PUT,DELETE',
     allowedHeaders: 'Content-Type,Authorization',
   })

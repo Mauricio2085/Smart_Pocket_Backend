@@ -13,6 +13,8 @@ const config = {
   dbUrl: process.env.DATABASE_URL,
   dbPublicUrl: process.env.DATABASE_PUBLIC_URL,
   jwtSecret: process.env.JWT_SECRET,
+  cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
+  cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
 };
 
 const whatsappNumber = process.env.WHATSAPP_NUMBER;
