@@ -38,7 +38,7 @@ const createProduct = async (req, res, next) => {
     productCreated = await createOneProduct(req.body);
     res.json({
       data: productCreated,
-      message: 'Product created',
+      message: 'Producto creado exitosamente!!',
       status: res.statusCode,
     });
   } catch (err) {

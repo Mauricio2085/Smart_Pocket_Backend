@@ -5,7 +5,7 @@ const generateProducts = async () => {
   try {
     const query = `SELECT *	FROM productos;`;
     const rta = await pool.query(query);
-    console.log('📌 Datos obtenidos:', rta.rows);
+    console.log('Datos obtenidos:', rta.rows);
     return rta.rows;
   } catch (err) {
     console.error('Error en la consulta:', err.message);
@@ -74,7 +74,7 @@ const createOneProduct = async (productData) => {
     ]);
     return rta.rows;
   } catch (err) {
-    throw Boom.badRequest('Error al crear el producto', {
+    throw Boom.badRequest('Error al crear el producto!!', {
       error: err.message,
     });
   }
