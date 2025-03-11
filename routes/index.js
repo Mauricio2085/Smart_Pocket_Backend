@@ -18,6 +18,7 @@ const routersApi = (app) => {
   router.use('/profile', loginRouter);
   router.use('/dbTest', databaseTest);
   router.use('/dashboard', productsRouter);
+  router.use('/admin', productsRouter);
   router.use('/crear-producto', productsRouter);
   router.use('/get-signature', cloudinarySignatureRouter);
   router.use('/', (req, res) => {

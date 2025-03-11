@@ -13,6 +13,8 @@ router.get('/product-detail/:productId', getSingleProduct);
 
 router.get('/sumary', sumaryProducts);
 
+router.get('/detail/:productId', getSingleProduct);
+
 router.post('/', createProduct);
 
 module.exports = router;
