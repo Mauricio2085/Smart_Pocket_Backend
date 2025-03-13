@@ -5,6 +5,7 @@ const {
   createProduct,
   sumaryProducts,
   updateProducts,
+  deleteProducts,
 } = require('../controllers/products.controller');
 const router = express.Router();
 
@@ -19,4 +20,6 @@ router.get('/detail/:productId', getSingleProduct);
 router.post('/', createProduct);
 
 router.patch('/', updateProducts);
+
+router.delete('/', deleteProducts);
 module.exports = router;

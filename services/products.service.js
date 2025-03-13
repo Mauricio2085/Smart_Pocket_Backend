@@ -3,7 +3,8 @@ const pool = require('../libs/postgres.pool');
 
 const generateProducts = async () => {
   try {
-    const query = `SELECT *	FROM productos;`;
+    const query = `SELECT *	FROM productos
+    ORDER BY id_producto ASC;`;
     const rta = await pool.query(query);
     console.log('Datos obtenidos:', rta.rows);
     return rta.rows;
@@ -26,7 +27,7 @@ const getOneProduct = async (id) => {
     const query = `SELECT * 
     FROM productos 
     INNER JOIN categorias ON productos.categoria_id = categorias.id_categoria
-    WHERE productos.id_producto = $1`;
+    WHERE productos.id_producto = $1;`;
     const rta = await pool.query(query, [idNumber]);
     return rta.rows;
   } catch (err) {
@@ -82,7 +83,9 @@ const createOneProduct = async (productData) => {
 
 const getSumaryProducts = async () => {
   try {
-    const query = `SELECT id_producto, nombre_producto, costo_unitario, porcentaje_utilidad, precio_venta, cantidad FROM productos;`;
+    const query = `SELECT id_producto, nombre_producto, costo_unitario, porcentaje_utilidad, precio_venta, cantidad 
+    FROM productos
+    ORDER BY id_producto ASC;`;
     const rta = await pool.query(query);
     return rta.rows;
   } catch (err) {
@@ -139,10 +142,25 @@ const updateOneProduct = async (productData) => {
   }
 };
 
+const deleteOneProduct = async (id) => {
+  try {
+    const idNumber = Number(id);
+    const query = `DELETE FROM productos WHERE id_producto = $1 RETURNING id_producto, nombre_producto;`;
+    const rta = await pool.query(query, [idNumber]);
+    return rta.rows;
+  } catch (err) {
+    console.log(err);
+    throw Boom.badRequest('Error al eliminar el producto!', {
+      error: err.message,
+    });
+  }
+};
+
 module.exports = {
   generateProducts,
   getOneProduct,
   createOneProduct,
   getSumaryProducts,
   updateOneProduct,
+  deleteOneProduct,
 };
