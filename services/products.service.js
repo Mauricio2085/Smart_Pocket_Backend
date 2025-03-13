@@ -92,9 +92,57 @@ const getSumaryProducts = async () => {
   }
 };
 
+const updateOneProduct = async (productData) => {
+  try {
+    console.log(productData);
+    const {
+      id_producto,
+      nombre_producto,
+      imagen_producto,
+      descripcion,
+      especificaciones,
+      categoria_id,
+      cantidad,
+      costo_unitario,
+      porcentaje_utilidad,
+      disponible,
+      destacado,
+      propietario,
+      nombre_comercial,
+      precio_comercial,
+    } = productData;
+    const query = `UPDATE productos
+    SET nombre_producto = $2, imagen_producto = $3, descripcion = $4, especificaciones = $5, categoria_id = $6, cantidad = $7, costo_unitario = $8, porcentaje_utilidad = $9, disponible = $10, destacado = $11, propietario = $12, nombre_comercial = $13, precio_comercial = $14
+    WHERE id_producto = $1;`;
+    const rta = await pool.query(query, [
+      id_producto,
+      nombre_producto,
+      imagen_producto,
+      descripcion,
+      especificaciones,
+      categoria_id,
+      cantidad,
+      costo_unitario,
+      porcentaje_utilidad,
+      disponible,
+      destacado,
+      propietario,
+      nombre_comercial,
+      precio_comercial,
+    ]);
+    return rta.rows;
+  } catch (err) {
+    console.log(err);
+    throw Boom.badRequest('Error al modificar el producto!', {
+      error: err.message,
+    });
+  }
+};
+
 module.exports = {
   generateProducts,
   getOneProduct,
   createOneProduct,
   getSumaryProducts,
+  updateOneProduct,
 };

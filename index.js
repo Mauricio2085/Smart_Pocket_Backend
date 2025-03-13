@@ -17,7 +17,7 @@ const corsOptions = {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: 'GET,POST,PUT,DELETE',
+  methods: 'GET,POST,PUT,DELETE,PATCH',
   allowedHeaders: 'Content-Type,Authorization',
 };
 

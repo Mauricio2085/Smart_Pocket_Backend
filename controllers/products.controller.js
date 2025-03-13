@@ -3,6 +3,7 @@ const {
   getOneProduct,
   createOneProduct,
   getSumaryProducts,
+  updateOneProduct,
 } = require('../services/products.service');
 
 const getAllProducts = async (req, res, next) => {
@@ -46,9 +47,23 @@ const createProduct = async (req, res, next) => {
   }
 };
 
+const updateProducts = async (req, res, next) => {
+  try {
+    productCreated = await updateOneProduct(req.body);
+    res.json({
+      data: productCreated,
+      message: 'Producto actualizado exitosamente!!',
+      status: res.statusCode,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getAllProducts,
   getSingleProduct,
   createProduct,
   sumaryProducts,
+  updateProducts,
 };

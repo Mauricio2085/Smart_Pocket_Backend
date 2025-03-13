@@ -20,6 +20,7 @@ const routersApi = (app) => {
   router.use('/dashboard', productsRouter);
   router.use('/admin', productsRouter);
   router.use('/crear-producto', productsRouter);
+  router.use('/modificar-producto', productsRouter);
   router.use('/get-signature', cloudinarySignatureRouter);
   router.use('/', (req, res) => {
     res.send('Hola soy la raiz');
