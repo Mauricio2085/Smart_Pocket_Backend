@@ -10,6 +10,44 @@
 
 Smart Pocket Backend es la API REST que impulsa la gestión de productos y autenticación de usuarios en Smart Pocket, una aplicación web diseñada para facilitar el control de inventario y ventas. Construido con Node.js, Express y PostgreSQL, este backend implementa buenas prácticas de seguridad, autenticación con JWT y manejo estructurado de errores con Boom.
 
+## Demo del Backend en Railway
+
+Puedes probar la API conectándola con el frontend Smart-Pocket-v1, el cual ya está configurado para apuntar al backend desplegado en Railway:
+
+- **Backend Demo:** [smartdemo-production.up.railway.app](https://smartdemo-production.up.railway.app) (Configurado en ".env.development" del frontend)
+- Repositorio del Frontend: [GitHub - smart-pocket-v1](https://github.com/Mauricio2085/smart-pocket-v1.git)
+
+### Cómo probar la API
+
+1. Clona el repositorio del frontend
+
+```sh
+git clone https://github.com/Mauricio2085/smart-pocket-v1.git
+cd smart-pocket-v1
+```
+
+2. Instala dependencias y jecuta el frontend
+
+```sh
+npm install
+npm start
+```
+
+3. Abre la aplicación en tu navegador
+
+Accede a http://localhost:3000 e inicia sesión con las siguientes credenciales de prueba:
+
+```
+- email: smart@example.com
+- contraseña: SmartPocket2025*
+```
+
+## Notas Importantes
+
+- No necesitas configurar variables de entorno. El frontend ya incluye .env.production y .env.development con la configuración adecuada.
+
+- Si tienes problemas con la conexión, asegúrate de que npm start está ejecutando correctamente el entorno de desarrollo.
+
 ## Características
 
 - **Autenticación Segura:** Implementación de JWT para proteger los endpoints.
@@ -33,14 +71,14 @@ Smart Pocket Backend es la API REST que impulsa la gestión de productos y auten
 
 ## Motivación del Proyecto
 
-Este backend fue desarrollado como parte de mi aprendizaje en desarrollo backend con Node.js, Express y PostgreSQL. Mi objetivo era crear una API segura, eficiente y escalable que pudiera ser utilizada en un entorno real de comercio electrónico y gestión de inventario para clientes pequeños que no cuentan con pasarelas de pago.
+Este backend fue desarrollado como parte de mi aprendizaje en desarrollo backend con Node.js, Express y PostgreSQL. Mi objetivo era crear una API segura, eficiente y escalable que pudiera ser utilizada en un entorno real de comercio electrónico y gestión de inventario para clientes pequeños que no cuentan con pasarelas de pago para que puedan realizar sus negociaciones de manera rápida vía whatsapp.
 
 ## Requisitos Previos
 
 - Node.js (se recomienda la versión 20)
 - PostgreSQL (base de datos)
 
-## Instalación y Configuración
+## Instalación y Configuración de la api
 
 1. Clonar el repositorio:
 
@@ -65,9 +103,10 @@ DB_USER=tu_usuario
 DB_PASSWORD=tu_contraseña
 DB_NAME=smart_pocket
 DB_PORT=5432
-WHATSAPP_NUMBER=573122222222
-DATABASE_URL=postgres://DB_USER:DB_PASSWORD@DB_HOST:DB_PORT/DB_NAME
-DATABASE_PUBLIC_URL=url_pública_para_base_de_datos_en_produccion
+# Ejemplo de número de Whatsapp
+WHATSAPP_NUMBER=571111111111
+# Utilizada unicamente cuando el backend está desplegado en producción (ejemplo en Railway)
+DATABASE_URL=postgres://RailwayUser@postgres.railway.internal:5432/railway
 JWT_SECRET=clave_secreta
 CLOUDINARY_API_KEY=cloudinary_api_key
 CLOUDINARY_API_SECRET=cloudinary_api_secret
@@ -78,14 +117,14 @@ CLOUDINARY_API_SECRET=cloudinary_api_secret
 Ejecuta el siguiente comando para crear la base de datos con las tablas, triggers y relaciones necesarias, asegurándose de estar en la raiz del proyecto:
 
 ```sh
-# Asegúrate de estar en la raíz del proyecto antes de ejecutar el siguiente comando:
+# Crear la base de datos con las tablas necesarias
 psql -U tu_usuario -d smart_pocket -f ./database/database.sql
 ```
 
 5. Generar un hash para la contraseña del usuario administrador:
 
 ```sh
-echo -n "Tu_Contraseña_Segura" | sha256sum
+node -e "console.log(require('bcryptjs').hashSync('tu_contraseña_segura', 10))"
 ```
 
 - Copia el hash generado y reemplázalo en la siguiente consulta:
@@ -110,40 +149,40 @@ El backend se ejecutará en http://localhost:5000 por defecto.
 
 ### Autenticación
 
-POST /api/v1/login - Iniciar sesión.
-GET /api/v1/profile - Obtener información del usuario autenticado.
+- POST /api/v1/login - Iniciar sesión.
+- GET /api/v1/profile - Obtener información del usuario autenticado.
 
 ### Productos
 
-GET /api/v1/productos - Obtener todos los productos.
-GET /api/v1/productos/product-detail/:productId - Obtener detalles de un producto en vista pública.
+- GET /api/v1/productos - Obtener todos los productos.
+- GET /api/v1/productos/product-detail/:productId - Obtener detalles de un producto en vista pública.
 
 ### Categorias
 
-GET /api/v1/categorias - Obtener todas las categorias.
-GET /api/v1/categorias/:categoryName/:categoryId - Obtener todos los productos de determinada categoria.
+- GET /api/v1/categorias - Obtener todas las categorias.
+- GET /api/v1/categorias/:categoryName/:categoryId - Obtener todos los productos de determinada categoria.
 
 ### Whatsapp
 
-GET /api/v1/whatsapp-number - Obtener número de whatsapp del propietario.
+- GET /api/v1/whatsapp-number - Obtener número de whatsapp del propietario.
 
 ### Search
 
-GET /api/v1/search - Obtener producto por el nombre requerido.
+- GET /api/v1/search - Obtener producto por el nombre requerido.
 
 ### Cloudinary
 
-GET /api/v1/get-signature - Obtener firma de parámetros para autenticación y consumo seguro de la api de Cloudinary.
+- GET /api/v1/get-signature - Obtener firma de parámetros para autenticación y consumo seguro de la api de Cloudinary.
 
 ## Endpoints privados
 
 ### Panel de administración y Productos
 
-GET /api/v1/admin/dashboard/summary - Obtener lista de productos con información resumida en vista privada.
-GET /api/v1/admin/detail/:productId - Obtener información completa de un producto en vista privada.
-POST /api/v1/admin/productos - Crear un nuevo producto.
-PATCH /api/v1/admin/productos - Actualizar un producto.
-DELETE /api/v1/admin/productos - Eliminar un producto.
+- GET /api/v1/admin/dashboard/summary - Obtener lista de productos con información resumida en vista privada.
+- GET /api/v1/admin/detail/:productId - Obtener información completa de un producto en vista privada.
+- POST /api/v1/admin/productos - Crear un nuevo producto.
+- PATCH /api/v1/admin/productos - Actualizar un producto.
+- DELETE /api/v1/admin/productos - Eliminar un producto.
 
 ## Manejo de Errores
 
@@ -177,12 +216,16 @@ Durante el desarrollo de este proyecto, reforcé mis conocimientos en:
 
 - Para desplegar el backend, puedes usar plataformas como Railway, Render, Heroku o VPS.
 
-Ejemplo de variable de entorno en producción:
+Ejemplo de variables de entorno en producción desplegado en Railway:
 
 ```sh
-WHATSAPP_NUMBER=573122222222
-DATABASE_URL=postgres://user:password@db_host:port/database_name
+# Ejemplo de número de Whatsapp
+WHATSAPP_NUMBER=571111111111
+# Ejemplo de base de datos en Railway
+DATABASE_URL=postgres://RailwayUser@postgres.railway.internal:5432/railway
+# Tu clave secreta de JWT
 JWT_SECRET=clave_secreta
+# API key de tu usuario de Cloudinary
 CLOUDINARY_API_KEY=claudinary_api_key
 CLOUDINARY_API_SECRET=claudinary_api_secret
 ```

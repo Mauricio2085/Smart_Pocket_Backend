@@ -11,7 +11,6 @@ const config = {
   dbName: process.env.DB_NAME,
   dbPort: process.env.DB_PORT,
   dbUrl: process.env.DATABASE_URL,
-  dbPublicUrl: process.env.DATABASE_PUBLIC_URL,
   jwtSecret: process.env.JWT_SECRET,
   cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
   cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,

@@ -64,7 +64,7 @@ VALUES ('Aseo'), ('Ferretería'), ('Juguetería'), ('Mascotas'), ('Hogar'), ('El
 -- INSERT INTO roles (nombre_rol) VALUES ('admin'), ('usuario'), ('vendedor');
 
 -- INSERT INTO usuarios (nombre, correo, contraseña, rol_id) 
--- VALUES ('Admin Smart', 'smart@example.com', 'e5e3cd3b3ef10dbeaaf1a95836bcb917c293ff55b2ffff794e50a879f01bc323', 1);
+-- VALUES ('Admin Smart', 'smart@example.com', '$2b$10$9BmVjGGF71Re.b2jqKnRD.eHqS93wcacSMgrhKZYkfVprIqhD3ALG', 1); SmartPocket2025*
 
 
 
