@@ -3,7 +3,7 @@ const {
   getAllProducts,
   getSingleProduct,
   createProduct,
-  sumaryProducts,
+  summaryProducts,
   updateProducts,
   deleteProducts,
 } = require('../controllers/products.controller');
@@ -13,13 +13,13 @@ router.get('/', getAllProducts);
 
 router.get('/product-detail/:productId', getSingleProduct);
 
-router.get('/sumary', sumaryProducts);
+router.get('/dashboard/summary', summaryProducts);
 
 router.get('/detail/:productId', getSingleProduct);
 
-router.post('/', createProduct);
+router.post('/productos', createProduct);
 
-router.patch('/', updateProducts);
+router.patch('/productos', updateProducts);
 
-router.delete('/', deleteProducts);
+router.delete('/productos', deleteProducts);
 module.exports = router;

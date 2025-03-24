@@ -9,8 +9,7 @@ const generateProducts = async () => {
     console.log('Datos obtenidos:', rta.rows);
     return rta.rows;
   } catch (err) {
-    console.error('Error en la consulta:', err.message);
-    // throw Boom.notFound('Productos no disponibles', { error: err.message });
+    throw Boom.notFound('Productos no disponibles', { error: err.message });
   }
 };
 

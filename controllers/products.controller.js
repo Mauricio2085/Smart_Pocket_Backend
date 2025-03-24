@@ -16,10 +16,10 @@ const getAllProducts = async (req, res, next) => {
   }
 };
 
-const sumaryProducts = async (req, res, next) => {
+const summaryProducts = async (req, res, next) => {
   try {
-    const sumary = await getSumaryProducts();
-    res.json(sumary);
+    const summary = await getSumaryProducts();
+    res.json(summary);
   } catch (err) {
     next(err);
   }
@@ -80,7 +80,7 @@ module.exports = {
   getAllProducts,
   getSingleProduct,
   createProduct,
-  sumaryProducts,
+  summaryProducts,
   updateProducts,
   deleteProducts,
 };
