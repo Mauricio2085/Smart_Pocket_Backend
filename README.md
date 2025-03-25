@@ -7,6 +7,7 @@
 ![Boom](https://img.shields.io/badge/Boom-Error%20Handling-red?style=for-the-badge)
 ![Cloudinary](https://img.shields.io/badge/Cloudinary-Image%20Hosting-blue?style=for-the-badge&logo=cloudinary)
 ![Railway](https://img.shields.io/badge/Deployed%20on-Railway-purple?style=for-the-badge&logo=railway)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge&logo=License)
 
 Smart Pocket Backend es la API REST que impulsa la gestión de productos y autenticación de usuarios en Smart Pocket, una aplicación web diseñada para facilitar el control de inventario y ventas. Construido con Node.js, Express y PostgreSQL, este backend implementa buenas prácticas de seguridad, autenticación con JWT y manejo estructurado de errores con Boom.
 
@@ -26,7 +27,7 @@ git clone https://github.com/Mauricio2085/smart-pocket-v1.git
 cd smart-pocket-v1
 ```
 
-2. Instala dependencias y jecuta el frontend
+2. Instala dependencias y ejecuta el frontend
 
 ```sh
 npm install
