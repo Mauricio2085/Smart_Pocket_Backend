@@ -25,7 +25,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.listen(port, () => {
-  console.log('lisening');
+  console.log('lisening in port ' + port);
 });
 routersApi(app);
 

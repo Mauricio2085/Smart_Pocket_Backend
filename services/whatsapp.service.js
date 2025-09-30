@@ -1,5 +1,7 @@
 const Boom = require('@hapi/boom');
-const { whatsappNumber } = require('../config/config');
+const { config } = require('../config/config');
+
+const whatsappNumber = config.whatsappNumber;
 
 const getWhatsappNumber = () => {
   if (!whatsappNumber) {
