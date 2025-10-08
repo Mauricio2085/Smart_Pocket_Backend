@@ -1,22 +1,28 @@
-const crypto = require('crypto');
+const cloudinary = require('cloudinary').v2;
 const { config } = require('../config/config');
 
+cloudinary.config({
+  cloud_name: config.cloudinaryCloudName,
+  api_key: config.cloudinaryApiKey,
+  api_secret: config.cloudinaryApiSecret,
+});
+
 const cloudinaryController = (req, res) => {
-  const timestamp = Math.round(new Date().getTime() / 1000); // Tiempo en segundos
+  const timestamp = Math.round(new Date().getTime() / 1000);
+  const folderName = 'smart_pocket';
 
-  //Cloudinary espera una firma en el formato: `timestamp=1234567890api_secret`
-  const paramsToSign = `timestamp=${timestamp}${config.cloudinaryApiSecret}`;
-
-  //Se genera la firma con SHA-256
-  const signature = crypto
-    .createHash('sha256')
-    .update(paramsToSign)
-    .digest('hex');
+  const signature = cloudinary.utils.api_sign_request(
+    {
+      timestamp: timestamp,
+      folder: folderName,
+    },
+    config.cloudinaryApiSecret
+  );
 
   res.json({
-    timestamp, // Enviado al frontend para la validación
-    signature, // Firma segura generada
-    api_key: config.cloudinaryApiKey, // API Key
+    timestamp,
+    signature,
+    api_key: config.cloudinaryApiKey,
   });
 };
 
