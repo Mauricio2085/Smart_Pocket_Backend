@@ -1,29 +1,16 @@
 const bcrypt = require('bcryptjs');
-const poolConection = require('../libs/postgres.pool'); // Asegúrate de que este apunta a tu conexión con PostgreSQL
 
-const actualizarPassword = async () => {
-  const correoAdmin = 'smart-pocket@gmail.com'; // Reemplaza con el correo del administrador
-  const nuevaContraseña = '1234'; // Reemplázala con la contraseña real
+const password = process.argv[2];
 
-  try {
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(nuevaContraseña, salt);
+if (!password) {
+  console.log('Please provide a password as an argument.');
+  process.exit(1);
+}
 
-    const result = await poolConection.query(
-      'UPDATE usuarios SET contraseña = $1 WHERE correo = $2 RETURNING correo',
-      [hashedPassword, correoAdmin]
-    );
-
-    if (result.rowCount > 0) {
-      console.log(
-        `Contraseña actualizada para el usuario: ${result.rows[0].correo}`
-      );
-    } else {
-      console.log('Usuario no encontrado.');
-    }
-  } catch (error) {
-    console.error('Error actualizando contraseña:', error);
+bcrypt.hash(password, 10, (err, hash) => {
+  if (err || !hash) {
+    console.error('Error hashing password:', err);
+    process.exit(1);
   }
-};
-
-actualizarPassword();
+  console.log('Hashed password:', hash);
+});
