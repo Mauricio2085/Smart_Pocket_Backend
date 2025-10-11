@@ -61,10 +61,10 @@ CREATE TABLE usuarios (
 INSERT INTO categorias ( nombre_categoria ) 
 VALUES ('Aseo'), ('Ferretería'), ('Juguetería'), ('Mascotas'), ('Hogar'), ('Electrodomésticos'), ('Accesorios');
 
--- INSERT INTO roles (nombre_rol) VALUES ('admin'), ('usuario'), ('vendedor');
+INSERT INTO roles (nombre_rol) VALUES ('admin'), ('usuario'), ('vendedor');
 
--- INSERT INTO usuarios (nombre, correo, contraseña, rol_id) 
--- VALUES ('Admin Smart', 'smart@example.com', '$2b$10$9BmVjGGF71Re.b2jqKnRD.eHqS93wcacSMgrhKZYkfVprIqhD3ALG', 1); SmartPocket2025*
+INSERT INTO usuarios (nombre, correo, contraseña, rol_id) 
+VALUES ('Admin Smart', 'smart@example.com', '$2b$10$9BmVjGGF71Re.b2jqKnRD.eHqS93wcacSMgrhKZYkfVprIqhD3ALG', 1); -- SmartPocket2025*
 
 
 
@@ -100,11 +100,6 @@ VALUES ('Aseo'), ('Ferretería'), ('Juguetería'), ('Mascotas'), ('Hogar'), ('El
 --         );
 
 
--- UPDATE categorias
--- SET imagen_categoria = 'https://res.cloudinary.com/dzmtakw9n/image/upload/v1727581700/smart_pocket/electro.jpg'
--- WHERE id_categoria = 1;
 
--- UPDATE productos
--- SET descripcion = 'Juego de ollas que incluye:'|| chr(10) ||'• Olla de 24 cm' || chr(10) || '• Olla de 20 cm' || chr(10) || '• Olla de 18 cm' || chr(10) || '• Sartén de 24 cm'
--- WHERE id_producto = 2;
+
 
